@@ -61,33 +61,13 @@ Docker and Docker Compose installed on your system
 Steps
 Clone the Repository
 
-git clone https://github.com/username/Credit-Approval-System.git
-cd Credit-Approval-System
-Set Up Environment Variables
-
-Create a .env file (if required) to store environment-specific variables such as database credentials.
-Build and Run the Docker Containers
-
-docker-compose up --build
-This command builds the Docker images and starts the containers for both the Django app and PostgreSQL database.
-
 Apply Migrations
 
 docker-compose exec web python manage.py makemigrations
 docker-compose exec web python manage.py migrate
 Run Background Tasks for Data Ingestion
 
-The data ingestion tasks will run in the background, importing data from customer_data.xlsx and loan_data.xlsx.
-Running the Application
-Access the API at: http://localhost:8000
-Admin Panel: http://localhost:8000/admin (ensure you create a superuser using python manage.py createsuperuser)
-API Endpoints
-1. Register Customer (POST /register/)
-Registers a new customer and calculates the approved credit limit.
-Request Body: first_name, last_name, age, monthly_income, phone_number
-Response: Customer details with calculated credit limit.
-2. Check Loan Eligibility (POST /check-eligibility/)
-Checks the loan eligibility of a customer based on their credit score.
+re.
 Request Body: customer_id, loan_amount, interest_rate, tenure
 Response: Loan eligibility status and recommended interest rate.
 3. Create Loan (POST /create-loan/)
@@ -103,41 +83,7 @@ Response: A list of loan details.
 Background Tasks
 The project uses background tasks to ingest data from customer_data.xlsx and loan_data.xlsx.
 Libraries Used: background_task
-Database Models
-1. Customer Model
-customer_id: Auto-incremented primary key
-first_name, last_name, age, phone_number
-monthly_salary, approved_limit, current_debt
-2. Loan Model
-loan_id: Auto-incremented primary key
-customer: Foreign key linking to Customer
-loan_amount, tenure, interest_rate, monthly_repayment
-emis_paid_on_time, start_date, end_date
-Example Requests
-Register Customer
-POST /register/
-{
-  "first_name": "John",
-  "last_name": "Doe",
-  "age": 30,
-  "monthly_income": 50000,
-  "phone_number": "1234567890"
-}
-Check Loan Eligibility
-POST /check-eligibility/
-{
-  "customer_id": 1,
-  "loan_amount": 100000,
-  "interest_rate": 10,
-  "tenure": 24
-}
-Create Loan
-POST /create-loan/
-{
-  "customer_id": 1,
-  "loan_amount": 100000,
-  "interest_rate": 10,
-  "tenure": 24
+
 }
 Future Improvements
 Implement a frontend for better user experience.
